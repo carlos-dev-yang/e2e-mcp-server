@@ -1,0 +1,19 @@
+{
+  "name": "frontend",
+  "root": "apps/frontend",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Build command for frontend (to be defined)'"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Test command for frontend (to be defined)'"
+      }
+    }
+  }
+}

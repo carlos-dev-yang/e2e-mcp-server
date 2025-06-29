@@ -1,0 +1,352 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Infrastructure and Repository",
+        "description": "Initialize the project repository with proper structure, development environment, and CI/CD pipeline setup",
+        "details": "Create monorepo structure with separate packages for frontend (React SPA), backend (Hono edge functions), and worker services. Setup package.json with TypeScript, ESLint, Prettier configurations. Initialize Docker configurations for worker services. Setup GitHub Actions for CI/CD pipeline with automated testing and deployment workflows. Configure environment variables and secrets management.",
+        "testStrategy": "Verify repository structure, ensure all dependencies install correctly, validate CI/CD pipeline runs successfully with sample commits",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Monorepo Structure",
+            "description": "Create the basic monorepo structure with separate packages for frontend, backend, and worker services",
+            "dependencies": [],
+            "details": "Use a tool like Lerna or Nx to set up a monorepo. Create directories for 'packages/frontend' (React SPA), 'packages/backend' (Hono edge functions), and 'packages/worker-services'. Initialize each package with its own package.json.",
+            "status": "done",
+            "testStrategy": "Verify the correct directory structure and presence of package.json files in each package"
+          },
+          {
+            "id": 2,
+            "title": "Configure Development Environment",
+            "description": "Set up TypeScript, ESLint, and Prettier configurations for the project",
+            "dependencies": [
+              1
+            ],
+            "details": "Create root tsconfig.json, .eslintrc.js, and .prettierrc files. Configure TypeScript for strict mode and ESNext features. Set up ESLint with TypeScript parser and Prettier integration. Create scripts in root package.json for linting and formatting.",
+            "status": "done",
+            "testStrategy": "Run linting and formatting scripts to ensure they work across all packages"
+          },
+          {
+            "id": 3,
+            "title": "Setup Docker Configurations",
+            "description": "Create Docker configurations for worker services",
+            "dependencies": [
+              1
+            ],
+            "details": "Create a Dockerfile in the worker-services package. Define multi-stage build process for development and production. Include necessary dependencies and build steps. Create a docker-compose.yml file for local development if needed.",
+            "status": "done",
+            "testStrategy": "Build Docker image and run a container to ensure worker services function correctly"
+          },
+          {
+            "id": 4,
+            "title": "Implement CI/CD Pipeline",
+            "description": "Set up GitHub Actions for automated testing and deployment workflows",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create .github/workflows directory. Define YAML files for CI pipeline (run tests, linting) and CD pipeline (build and deploy to staging/production). Include steps for building Docker images and pushing to a registry. Set up branch protection rules in GitHub.",
+            "status": "done",
+            "testStrategy": "Push a change to trigger the CI/CD pipeline and verify all steps complete successfully"
+          },
+          {
+            "id": 5,
+            "title": "Configure Environment Variables and Secrets",
+            "description": "Set up environment variables and secrets management for the project",
+            "dependencies": [
+              4
+            ],
+            "details": "Create .env.example files for each package. Set up GitHub Secrets for sensitive information. Implement a secrets management solution (e.g., HashiCorp Vault) for production. Update CI/CD workflows to use secrets and environment variables appropriately.",
+            "status": "done",
+            "testStrategy": "Verify that the application can access environment variables and secrets in both local and CI/CD environments"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Setup Supabase Database and Authentication",
+        "description": "Configure Supabase project with database schema, authentication, and Row Level Security policies",
+        "details": "Create Supabase project and configure database tables: users, projects, test_scenarios, test_executions, test_results, snapshots. Implement Row Level Security policies for team-based access control (Owner, Editor, Viewer roles). Setup OAuth2 authentication with GitHub/Google providers. Configure storage buckets for test snapshots and artifacts. Create database migrations and seed data.",
+        "testStrategy": "Test user registration/login flows, verify RLS policies work correctly, validate database schema with sample data insertion and queries",
+        "priority": "high",
+        "dependencies": [
+          1,
+          "13"
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Supabase project and configure database tables",
+            "description": "Set up a new Supabase project and create the required database tables: users, projects, test_scenarios, test_executions, test_results, and snapshots.",
+            "dependencies": [],
+            "details": "Use Supabase dashboard to create a new project. Define table schemas using SQL or Supabase interface. Ensure proper relationships and constraints between tables.",
+            "status": "in-progress",
+            "testStrategy": "Verify table creation and relationships using Supabase Table View and SQL queries."
+          },
+          {
+            "id": 2,
+            "title": "Implement Row Level Security policies",
+            "description": "Create and apply Row Level Security (RLS) policies for team-based access control, including Owner, Editor, and Viewer roles.",
+            "dependencies": [
+              1
+            ],
+            "details": "Define RLS policies for each table, considering different access levels for Owner, Editor, and Viewer roles. Use Supabase RLS policy editor or SQL to implement policies.",
+            "status": "pending",
+            "testStrategy": "Test policies by creating sample users with different roles and verifying access restrictions."
+          },
+          {
+            "id": 3,
+            "title": "Setup OAuth2 authentication",
+            "description": "Configure OAuth2 authentication with GitHub and Google providers in the Supabase project.",
+            "dependencies": [
+              1
+            ],
+            "details": "Enable GitHub and Google OAuth providers in Supabase Authentication settings. Configure callback URLs and obtain necessary API keys and secrets from GitHub and Google developer consoles.",
+            "status": "pending",
+            "testStrategy": "Attempt login using both GitHub and Google accounts, verifying successful authentication and user creation."
+          },
+          {
+            "id": 4,
+            "title": "Configure storage buckets",
+            "description": "Set up Supabase storage buckets for test snapshots and artifacts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create storage buckets for test snapshots and artifacts using Supabase dashboard. Configure appropriate access policies and CORS settings for the buckets.",
+            "status": "pending",
+            "testStrategy": "Upload sample files to buckets and verify accessibility based on user roles."
+          },
+          {
+            "id": 5,
+            "title": "Create database migrations and seed data",
+            "description": "Develop database migration scripts and create seed data for initial testing and development.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Write SQL migration scripts for schema changes. Create seed data scripts to populate tables with sample data for users, projects, and test scenarios. Use Supabase CLI or custom scripts for migrations and seeding.",
+            "status": "pending",
+            "testStrategy": "Run migrations on a test database, verify schema changes, and check seed data insertion."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Develop React Frontend Application",
+        "description": "Build the main React SPA with scenario input UI, dashboard, and test management interfaces",
+        "details": "Create React application with TypeScript, Tailwind CSS, and React Router. Implement components: Gherkin-like scenario editor with syntax highlighting, test project dashboard, real-time test execution monitoring, results visualization with charts, team management interface. Setup state management with Zustand or Redux Toolkit. Implement responsive design following WCAG 2.1 AA guidelines. Add toast notifications and loading states.",
+        "testStrategy": "Unit tests with React Testing Library, integration tests for user flows, accessibility testing with axe-core, visual regression tests with Chromatic",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Build Hono Edge API Backend",
+        "description": "Develop the Hono-based edge API for handling test scenarios, user management, and orchestrating test executions",
+        "details": "Create Hono application with TypeScript deployed on Cloudflare Workers or Vercel Edge Functions. Implement REST API endpoints: POST /scenarios (create/update), GET/POST /tests (list/execute), GET /results (fetch results), WebSocket endpoints for real-time progress streaming. Integrate with Supabase client for database operations. Add request validation with Zod schemas, rate limiting, and error handling middleware. Implement JWT token validation and user context.",
+        "testStrategy": "API integration tests with Vitest, load testing with Artillery, WebSocket connection testing, authentication flow validation",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Implement Playwright-MCP Test Code Generation Engine",
+        "description": "Build the core engine that converts Gherkin-like scenarios into executable Playwright test code using MCP",
+        "details": "Create Node.js service that parses Gherkin scenarios and generates Playwright test code. Implement MCP (Model Context Protocol) integration for intelligent test step interpretation. Support common test patterns: navigation, form filling, clicking, assertions, waiting for elements. Add template system for reusable test components. Implement error handling for invalid scenarios with detailed feedback. Support multiple browsers (Chrome, Firefox, WebKit) configuration.",
+        "testStrategy": "Unit tests for scenario parsing, integration tests with sample scenarios, validation of generated Playwright code syntax and execution",
+        "priority": "high",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Develop Dockerized Test Execution Workers",
+        "description": "Create containerized worker services that execute Playwright tests with proper isolation and resource management",
+        "details": "Build Docker containers with Node.js, Playwright, and all browser dependencies. Implement worker queue system using Redis or cloud-native queues. Create test execution orchestrator that manages parallel test runs, handles timeouts, captures screenshots/videos, collects console logs and network requests. Implement auto-scaling logic for worker pools. Add proper cleanup and resource management to prevent memory leaks.",
+        "testStrategy": "Container testing with test scenarios, load testing with concurrent executions, resource usage monitoring, failure recovery testing",
+        "priority": "high",
+        "dependencies": [
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Real-time Progress Streaming",
+        "description": "Build WebSocket-based real-time communication system for streaming test execution progress and results",
+        "details": "Implement WebSocket server in Hono backend for real-time communication. Create progress tracking system that reports test execution stages: queued, running, step completion percentages, final results. Build client-side WebSocket handlers in React for live updates. Implement connection recovery and reconnection logic. Add test cancellation functionality through WebSocket commands. Ensure progress accuracy within 5% tolerance as specified in requirements.",
+        "testStrategy": "WebSocket connection testing, progress accuracy validation, connection recovery testing, concurrent user simulation",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          4,
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Build Test Results Storage and Snapshot Management",
+        "description": "Implement comprehensive test results storage with screenshot/video snapshots and historical data management",
+        "details": "Create storage system using Supabase Storage for test artifacts (screenshots, videos, HAR files). Implement automatic snapshot capture at each test step. Build result aggregation system storing: execution metadata, step-by-step results, performance metrics, console logs. Add 30-day automatic archival policy as specified. Implement snapshot comparison and diff visualization. Create search and filtering capabilities for historical results.",
+        "testStrategy": "Storage integration testing, data retention policy validation, snapshot comparison accuracy testing, search functionality verification",
+        "priority": "medium",
+        "dependencies": [
+          6,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Develop Dashboard and Analytics Interface",
+        "description": "Create comprehensive dashboard for test results visualization, analytics, and project management",
+        "details": "Build dashboard components: test execution history with charts, success/failure rate analytics, flaky test identification, team performance metrics. Implement project management features: test scenario organization, team member management with role-based permissions, test scheduling and automation. Add export functionality for reports. Create responsive design for mobile access. Implement real-time updates for dashboard metrics.",
+        "testStrategy": "UI component testing, data visualization accuracy validation, permission system testing, responsive design verification",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Implement CI/CD Webhook Integration",
+        "description": "Build webhook system for integrating with CI/CD pipelines and external tools like GitHub, GitLab, Slack, and Jira",
+        "details": "Create webhook endpoints for triggering tests from CI/CD systems. Implement outbound webhooks for sending test results to external systems. Build integrations: GitHub/GitLab PR status updates, Slack notifications for test results, Jira issue linking. Add webhook authentication and retry mechanisms. Create webhook configuration UI in dashboard. Support custom webhook payloads and filtering rules.",
+        "testStrategy": "Webhook delivery testing, CI/CD integration validation, external service integration testing, authentication and security verification",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Implement Multi-browser Support and Cross-platform Testing",
+        "description": "Extend the platform to support multiple browsers (Chrome, Firefox, WebKit) with proper configuration management",
+        "details": "Enhance worker containers to support Chrome, Firefox, and WebKit browsers. Implement browser selection UI in scenario configuration. Add browser-specific test execution logic and result aggregation. Create browser compatibility matrix reporting. Implement parallel execution across different browsers for the same test scenario. Add browser version management and automatic updates with canary monitoring as specified in risk mitigation.",
+        "testStrategy": "Cross-browser test execution validation, browser compatibility testing, parallel execution verification, browser update impact testing",
+        "priority": "medium",
+        "dependencies": [
+          6,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Implement Security, Performance Optimization, and Monitoring",
+        "description": "Add comprehensive security measures, performance optimizations, and monitoring systems for production readiness",
+        "details": "Implement security measures: TLS 1.2+ encryption, input sanitization, rate limiting, access logging with encryption. Add performance optimizations: CDN integration, image compression, database query optimization, caching strategies. Implement monitoring: application performance monitoring (APM), error tracking, uptime monitoring, cost tracking for snapshot storage. Add alerting for system health and SLA compliance (99.5% target). Implement data filtering rules for privacy protection as specified in risk mitigation.",
+        "testStrategy": "Security penetration testing, performance load testing with 1000 concurrent users, monitoring system validation, SLA compliance verification",
+        "priority": "high",
+        "dependencies": [
+          8,
+          10,
+          11
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Restructure Monorepo and Integrate Nx",
+        "description": "Reorganize the project structure into 'apps' and 'packages' directories and integrate Nx to manage the monorepo with proper build orchestration and dependency management.",
+        "details": "Restructure the existing monorepo by creating 'apps' and 'packages' directories. Move frontend React application to 'apps/frontend', backend Hono API to 'apps/backend', and worker services to 'apps/workers'. Create shared packages in 'packages/' for common utilities, types, and configurations. Install and configure Nx workspace with nx.json configuration file defining build targets, test targets, and lint targets for each application. Setup project.json files for each app and package with proper build dependencies and scripts. Configure Nx executors for TypeScript compilation, testing with Vitest, linting with ESLint, and Docker builds for worker services. Implement Nx affected commands to only build/test changed applications. Setup workspace-level package.json with Nx CLI and shared dependencies. Configure Nx caching for faster builds and implement remote caching if using Nx Cloud. Update CI/CD pipeline to use Nx commands for efficient builds and deployments. Create nx-migrate scripts for future Nx version updates. Add workspace generators for creating new apps and packages following established patterns.",
+        "testStrategy": "Verify monorepo structure is correctly organized with apps and packages directories. Test that Nx commands (nx build, nx test, nx lint) work for all applications. Validate that Nx affected commands correctly identify changed projects. Ensure CI/CD pipeline successfully uses Nx for builds and deployments. Test workspace generators create new projects with proper configuration. Verify Nx caching improves build times and dependency graph is accurate.",
+        "status": "done",
+        "dependencies": [
+          1
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Restructure Project Directories",
+            "description": "Reorganize the existing monorepo by creating 'apps' and 'packages' directories and moving applications and shared code accordingly.",
+            "dependencies": [],
+            "details": "Create 'apps' and 'packages' directories at the root level. Move frontend React application to 'apps/frontend', backend Hono API to 'apps/backend', and worker services to 'apps/workers'. Create shared packages in 'packages/' for common utilities, types, and configurations. Ensure all import paths are updated to reflect the new structure.",
+            "status": "done",
+            "testStrategy": "Manually verify the new directory structure and run existing tests to ensure no functionality is broken due to the restructuring."
+          },
+          {
+            "id": 2,
+            "title": "Install and Configure Nx Workspace",
+            "description": "Set up Nx workspace with proper configuration files and define build targets for each application and package.",
+            "dependencies": [
+              1
+            ],
+            "details": "Install Nx CLI globally. Initialize Nx workspace with 'npx create-nx-workspace'. Create nx.json configuration file defining build targets, test targets, and lint targets for each application. Setup project.json files for each app and package with proper build dependencies and scripts. Configure Nx executors for TypeScript compilation, testing with Vitest, linting with ESLint, and Docker builds for worker services.",
+            "status": "done",
+            "testStrategy": "Run 'nx graph' to visualize the project structure and dependencies. Verify that all applications and packages are correctly represented."
+          },
+          {
+            "id": 3,
+            "title": "Implement Nx Build and Test Commands",
+            "description": "Set up Nx commands for building and testing applications, including affected commands for efficient CI/CD.",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement Nx affected commands to only build/test changed applications. Configure Nx caching for faster builds and implement remote caching if using Nx Cloud. Update the workspace-level package.json with Nx CLI and shared dependencies. Test build and test commands for each application and package.",
+            "status": "done",
+            "testStrategy": "Run 'nx affected:build' and 'nx affected:test' after making changes to verify that only the affected projects are built and tested."
+          },
+          {
+            "id": 4,
+            "title": "Update CI/CD Pipeline",
+            "description": "Modify the existing CI/CD pipeline to utilize Nx commands for efficient builds and deployments.",
+            "dependencies": [
+              3
+            ],
+            "details": "Update CI/CD configuration files (e.g., GitHub Actions, GitLab CI) to use Nx commands for building, testing, and deploying applications. Implement caching strategies for Nx to speed up CI/CD processes. Configure parallel execution of tasks where possible using Nx's capabilities.",
+            "status": "done",
+            "testStrategy": "Run a complete CI/CD pipeline in a test environment to ensure all stages complete successfully with the new Nx-based configuration."
+          },
+          {
+            "id": 5,
+            "title": "Create Nx Workspace Generators and Migration Scripts",
+            "description": "Develop custom Nx generators for creating new apps and packages, and prepare migration scripts for future Nx updates.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create nx-migrate scripts for future Nx version updates. Add workspace generators for creating new apps and packages following established patterns. Document the usage of custom generators and migration scripts for the development team.",
+            "status": "done",
+            "testStrategy": "Test custom generators by creating new sample apps and packages. Simulate an Nx version upgrade using the migration scripts in a test environment."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-28T12:09:25.228Z",
+      "updated": "2025-06-29T09:17:40.970Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
