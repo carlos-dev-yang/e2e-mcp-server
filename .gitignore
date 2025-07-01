@@ -12,6 +12,10 @@ node_modules/
 # Environment variables
 .env
 
+# API keys and sensitive config
+.cursor/mcp.json
+.gemini/settings.json
+
 # Editor directories and files
 .idea
 .vscode
