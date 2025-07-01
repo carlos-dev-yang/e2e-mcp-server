@@ -146,60 +146,16 @@
         "dependencies": [
           2
         ],
-        "status": "done",
+        "status": "pending",
         "subtasks": [
           {
             "id": 1,
-            "title": "Set up React project structure",
-            "description": "Initialize React application with TypeScript, Tailwind CSS, and React Router",
+            "title": "Create Basic Scenario Input UI",
+            "description": "Create a simple form where users can input their test scenarios in Gherkin-like format. This will be the first basic UI component for the frontend.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Create a new React project using Create React App or Vite. Configure TypeScript, install and set up Tailwind CSS, and add React Router for navigation. Set up folder structure for components, pages, and utilities.",
-            "status": "done",
-            "testStrategy": "Verify correct project setup by running the application and checking for TypeScript, Tailwind, and routing functionality"
-          },
-          {
-            "id": 2,
-            "title": "Implement core UI components",
-            "description": "Develop reusable UI components for the application",
-            "dependencies": [
-              1
-            ],
-            "details": "Create React components for common UI elements such as buttons, input fields, modals, and navigation bars. Implement a Gherkin-like scenario editor with syntax highlighting. Ensure components are responsive and follow WCAG 2.1 AA guidelines.",
-            "status": "done",
-            "testStrategy": "Write unit tests for each component using React Testing Library"
-          },
-          {
-            "id": 3,
-            "title": "Develop main application pages",
-            "description": "Create pages for dashboard, test management, and results visualization",
-            "dependencies": [
-              2
-            ],
-            "details": "Implement the test project dashboard, real-time test execution monitoring page, and results visualization page with charts. Use the core UI components developed in the previous subtask. Integrate React Router for navigation between pages.",
-            "status": "done",
-            "testStrategy": "Create integration tests for each page, ensuring proper rendering and functionality"
-          },
-          {
-            "id": 4,
-            "title": "Implement state management",
-            "description": "Set up state management using Zustand or Redux Toolkit",
-            "dependencies": [
-              3
-            ],
-            "details": "Choose between Zustand and Redux Toolkit for state management. Implement stores for managing application state, including test scenarios, execution status, and results. Integrate state management with the developed components and pages.",
-            "status": "done",
-            "testStrategy": "Write unit tests for state management logic and integration tests for state updates across components"
-          },
-          {
-            "id": 5,
-            "title": "Add final touches and optimizations",
-            "description": "Implement toast notifications, loading states, and performance optimizations",
-            "dependencies": [
-              4
-            ],
-            "details": "Add a toast notification system for user feedback. Implement loading states for asynchronous operations. Optimize performance by implementing code splitting, lazy loading, and memoization where appropriate. Conduct final responsive design checks and accessibility testing.",
-            "status": "done",
-            "testStrategy": "Perform end-to-end testing of the entire application, including performance benchmarks and accessibility audits"
+            "parentTaskId": 3
           }
         ]
       },
@@ -213,7 +169,7 @@
         "dependencies": [
           2
         ],
-        "status": "done",
+        "status": "pending",
         "subtasks": [
           {
             "id": 1,
@@ -282,7 +238,7 @@
         "dependencies": [
           4
         ],
-        "status": "done",
+        "status": "pending",
         "subtasks": [
           {
             "id": 1,
@@ -568,7 +524,7 @@
     ],
     "metadata": {
       "created": "2025-06-28T12:09:25.228Z",
-      "updated": "2025-06-29T13:44:04.404Z",
+      "updated": "2025-07-01T07:24:58.903Z",
       "description": "Tasks for master context"
     }
   }
