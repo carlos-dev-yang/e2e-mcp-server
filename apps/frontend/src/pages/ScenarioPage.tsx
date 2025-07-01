@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const ScenarioPage: React.FC = () => {
+export function ScenarioPage() {
   const [entryUrl, setEntryUrl] = useState('');
   const [rawScenario, setRawScenario] = useState('');
   const [refinedTestCase, setRefinedTestCase] = useState('');
@@ -173,5 +173,3 @@ ${rawScenario.split('\n').map((line, index) => {
     </div>
   );
 };
-
-export default ScenarioPage;
